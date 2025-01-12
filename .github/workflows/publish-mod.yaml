@@ -45,36 +45,6 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
 
-      - name: Publish to Modrinth and CurseForge and Github
-        uses: Kir-Antipov/mc-publish@v3.3
-        with:
-          version-type: ${{ env.VERSION_TYPE }}
-          name: "Clayium Unofficial: ${{ env.mod_version }}"
-          loaders: forge
-          game-versions: 1.12.2
-          java: 1.8
-
-          dependencies: |
-            codechicken-lib(required){modrinth:2gq0ALnz}{curseforge:242818}
-            forgelin-continuous(required)
-            mixinbooter(required){modrinth:G1ckZuWK}{curseforge:419286}
-            modularui(required)
-            jei(optional)
-            groovyscript(optional)
-            the-one-probe(optional)
-
-          github-generate-changelog: true
-          github-prerelease: false
-
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-          modrinth-id: m5ogv9xL
-          modrinth-featured: true
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-
-          curseforge-id: 1096085
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-
   dependency-submission:
 
     runs-on: ubuntu-latest
