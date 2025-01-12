@@ -237,7 +237,7 @@ object MachineBlockRecipeLoader {
         for (metaTileEntity in MetaTileEntities.CLAY_INTERFACE) {
             CRecipes.ASSEMBLER.builder()
                 .input(MACHINE_HULL.getItem(metaTileEntity.tier as ClayTiers))
-                .input(MetaTileEntities.CLAY_BUFFER[5])
+                .input(MetaTileEntities.CLAY_BUFFER[1])
                 .output(metaTileEntity.getStackForm())
                 .tier(4).CEt(ClayEnergy(10.0.pow(metaTileEntity.tier.numeric - 3).toLong())).duration(40)
                 .buildAndRegister()
