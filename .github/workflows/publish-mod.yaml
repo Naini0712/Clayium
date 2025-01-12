@@ -45,8 +45,8 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
         
-#      - name: Upload Build Artifacts
-#        uses: actions/upload-artifact@v2 
-#        with: 
-#          name: artifact
-#          path: build/libs/*.jar
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v2 
+        with: 
+          name: artifact
+          path: build/libs/*.jar
