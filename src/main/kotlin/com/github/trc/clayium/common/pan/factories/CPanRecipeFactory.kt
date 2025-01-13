@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 
 object CPanRecipeFactory : IPanRecipeFactory {
-    override fun getEntry(world: IBlockAccess, pos: BlockPos, stacks: List<ItemStack>): IPanRecipe? {
+    override fun getEntry(world: IBlockAccess, pos: BlockPos, stacks: List<ItemStack>, calculateLaserEnergy: Pair<Double, ClayEnergy>): IPanRecipe? {
         val metaTileEntity = world.getMetaTileEntity(pos)
         if (metaTileEntity is ClayReactorMetaTileEntity) {
             return getEntryClayReactor(metaTileEntity, stacks, calculateLaserEnergy())
