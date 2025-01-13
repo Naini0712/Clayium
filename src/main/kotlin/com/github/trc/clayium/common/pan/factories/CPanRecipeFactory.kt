@@ -7,6 +7,7 @@ import com.github.trc.clayium.api.pan.IPanRecipe
 import com.github.trc.clayium.api.pan.IPanRecipeFactory
 import com.github.trc.clayium.api.util.getMetaTileEntity
 import com.github.trc.clayium.common.pan.PanRecipe
+import com.github.trc.clayum.common.metatileentities.PanAdapterMetaTileEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
@@ -29,9 +30,8 @@ object CPanRecipeFactory : IPanRecipeFactory {
     private fun getEntryClayReactor(clayReactor: ClayReactorMetaTileEntity, stacks: List<ItemStack>, laserEnergy: Double, laserCostPerTick: ClayEnergy): IPanRecipe? {
         val recipe = clayReactor.workable.recipeProvider.searchRecipe(Int.MAX_VALUE, stacks) ?: return null
 
-        val finalizedDuration = recipe.duration.toDouble() / (laserEnergy + 1.0)
+        val finalizedDuration = recipe.duration.toDouble() / (calculateLaserEnergy.first + 1.0)
         val laserEnergyCost = laserCostPerTick * finalizedDuration
-        return PanRecipe(recipe.inputs, recipe.copyOutputs(), laserEnergy) 
-        //recipe.cePerTick * finalizedDuration + laserEnergyCost)
+        return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * finalizedDuration + calculateLaserEnergy.second)
     }
 }
