@@ -16,5 +16,5 @@ interface IPanRecipeFactory {
      * @param stacks the inventory of the PAN Adapter.
      */
     fun getEntry(world: IBlockAccess, pos: BlockPos, stacks: List<ItemStack>,
-                 calculateLaserEnergy: Pair<Double, ClayEnergy>): IPanRecipe?
+                 laserEnergy: Double, laserCostPerTick: ClayEnergy): IPanRecipe?
 }
