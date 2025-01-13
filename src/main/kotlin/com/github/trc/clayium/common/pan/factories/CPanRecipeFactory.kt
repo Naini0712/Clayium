@@ -24,6 +24,7 @@ object CPanRecipeFactory : IPanRecipeFactory {
             ?: return null
 
         return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * recipe.duration)
+        }
     }
 
     private fun getEntryClayReactor(clayReactor: ClayReactorMetaTileEntity, stacks: List<ItemStack>, laserEnergy: Double, laserCostPerTick: ClayEnergy): IPanRecipe? {
