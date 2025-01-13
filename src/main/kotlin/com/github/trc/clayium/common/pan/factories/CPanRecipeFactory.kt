@@ -27,7 +27,7 @@ object CPanRecipeFactory : IPanRecipeFactory {
         return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * recipe.duration)
     }
 
-    private fun getEntryClayReactor(clayReactor: ClayReactorMetaTileEntity, stacks: List<ItemStack>, laserEnergy: Double, laserCostPerTick: ClayEnergy): IPanRecipe? {
+    private fun getEntryClayReactor(clayReactor: ClayReactorMetaTileEntity, stacks: List<ItemStack>, calculateLaserEnergy: Pair<Double, ClayEnergy>): IPanRecipe? {
         val recipe = clayReactor.workable.recipeProvider.searchRecipe(Int.MAX_VALUE, stacks) ?: return null
 
         val finalizedDuration = recipe.duration.toDouble() / (calculateLaserEnergy.first + 1.0)
