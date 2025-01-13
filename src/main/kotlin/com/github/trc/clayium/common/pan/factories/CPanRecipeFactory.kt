@@ -16,7 +16,8 @@ object CPanRecipeFactory : IPanRecipeFactory {
     override fun getEntry(world: IBlockAccess, pos: BlockPos, stacks: List<ItemStack>, calculateLaserEnergy: Pair<Double, ClayEnergy>): IPanRecipe? {
         val metaTileEntity = world.getMetaTileEntity(pos)
         if (metaTileEntity is ClayReactorMetaTileEntity) {
-            return getEntryClayReactor(metaTileEntity, stacks, calculateLaserEnergy())
+            val laserEnergyPair = Pair(laserEnergy, ClayEnergy(laserEnergy))
+            return getEntryClayReactor(metaTileEntity, stacks, laserEnergyPair())
         }
         val recipe = metaTileEntity
             ?.getCapability(ClayiumTileCapabilities.RECIPE_LOGIC, null)
