@@ -13,10 +13,10 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 
 object CPanRecipeFactory : IPanRecipeFactory {
-    override fun getEntry(world: IBlockAccess, pos: BlockPos, stacks: List<ItemStack>, laserEnergy: Double, laserCostPerTick: ClayEnergy): IPanRecipe? {
+    override fun getEntry(world: IBlockAccess, pos: BlockPos, stacks: List<ItemStack>): IPanRecipe? {
         val metaTileEntity = world.getMetaTileEntity(pos)
         if (metaTileEntity is ClayReactorMetaTileEntity) {
-            return getEntryClayReactor(metaTileEntity, stacks, laserEnergy, laserCostPerTick)
+            return getEntryClayReactor(metaTileEntity, stacks, calculateLaserEnergy())
         }
         val recipe = metaTileEntity
             ?.getCapability(ClayiumTileCapabilities.RECIPE_LOGIC, null)
@@ -31,7 +31,7 @@ object CPanRecipeFactory : IPanRecipeFactory {
         val recipe = clayReactor.workable.recipeProvider.searchRecipe(Int.MAX_VALUE, stacks) ?: return null
 
         val finalizedDuration = recipe.duration.toDouble() / (calculateLaserEnergy.first + 1.0)
-        val laserEnergyCost = laserCostPerTick * finalizedDuration
-        return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * finalizedDuration + calculateLaserEnergy.second)
+        val laserEnergyCost = calculateLaserEnergy.second * finalizedDuration
+        return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * finalizedDuration + laserEnergyCost)
     }
 }
