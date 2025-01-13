@@ -7,7 +7,7 @@ import com.github.trc.clayium.api.pan.IPanRecipe
 import com.github.trc.clayium.api.pan.IPanRecipeFactory
 import com.github.trc.clayium.api.util.getMetaTileEntity
 import com.github.trc.clayium.common.pan.PanRecipe
-import com.github.trc.clayum.common.metatileentities.PanAdapterMetaTileEntity
+import com.github.trc.clayium.common.metatileentities.PanAdapterMetaTileEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
