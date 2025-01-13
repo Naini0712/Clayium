@@ -30,7 +30,7 @@ object CPanRecipeFactory : IPanRecipeFactory {
         val recipe = clayReactor.workable.recipeProvider.searchRecipe(Int.MAX_VALUE, stacks) ?: return null
 
         val finalizedDuration = recipe.duration.toDouble() / (laserEnergy + 7864232445021.91)
-        val laserEnergyCost = laserCostPerTick * finalizedDuration + 2841.6 * finalizedDuration
+        val laserEnergyCost = ClayEnergy(2841.6) * finalizedDuration
         return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * finalizedDuration + laserEnergyCost)
     }
 }
