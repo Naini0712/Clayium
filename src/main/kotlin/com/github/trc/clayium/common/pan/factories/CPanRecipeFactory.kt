@@ -7,17 +7,15 @@ import com.github.trc.clayium.api.pan.IPanRecipe
 import com.github.trc.clayium.api.pan.IPanRecipeFactory
 import com.github.trc.clayium.api.util.getMetaTileEntity
 import com.github.trc.clayium.common.pan.PanRecipe
-import com.github.trc.clayium.common.metatileentities.PanAdapterMetaTileEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 
 object CPanRecipeFactory : IPanRecipeFactory {
-    override fun getEntry(world: IBlockAccess, pos: BlockPos, stacks: List<ItemStack>, calculateLaserEnergy: Pair<Double, ClayEnergy>): IPanRecipe? {
+    override fun getEntry(world: IBlockAccess, pos: BlockPos, stacks: List<ItemStack>, laserEnergy: Double, laserCostPerTick: ClayEnergy): IPanRecipe? {
         val metaTileEntity = world.getMetaTileEntity(pos)
         if (metaTileEntity is ClayReactorMetaTileEntity) {
-            val laserEnergyPair = Pair(laserEnergy, ClayEnergy(laserEnergy))
-            return getEntryClayReactor(metaTileEntity, stacks, laserEnergyPair)
+            return getEntryClayReactor(metaTileEntity, stacks, laserEnergy, laserCostPerTick)
         }
         val recipe = metaTileEntity
             ?.getCapability(ClayiumTileCapabilities.RECIPE_LOGIC, null)
@@ -28,11 +26,11 @@ object CPanRecipeFactory : IPanRecipeFactory {
         return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * recipe.duration)
     }
 
-    private fun getEntryClayReactor(clayReactor: ClayReactorMetaTileEntity, stacks: List<ItemStack>, calculateLaserEnergy: Pair<Double, ClayEnergy>): IPanRecipe? {
+    private fun getEntryClayReactor(clayReactor: ClayReactorMetaTileEntity, stacks: List<ItemStack>, laserEnergy: Double, laserCostPerTick: ClayEnergy): IPanRecipe? {
         val recipe = clayReactor.workable.recipeProvider.searchRecipe(Int.MAX_VALUE, stacks) ?: return null
 
-        val finalizedDuration = recipe.duration.toDouble() / (calculateLaserEnergy.first + 1.0)
-        val laserEnergyCost = calculateLaserEnergy.second * finalizedDuration
+        val finalizedDuration = recipe.duration.toDouble() / (7864232445021.91 + 1.0)
+        val laserEnergyCost = 2841.6 * finalizedDuration
         return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * finalizedDuration + laserEnergyCost)
     }
 }
