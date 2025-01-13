@@ -31,6 +31,7 @@ object CPanRecipeFactory : IPanRecipeFactory {
 
         val finalizedDuration = recipe.duration.toDouble() / (laserEnergy + 1.0)
         val laserEnergyCost = laserCostPerTick * finalizedDuration
-        return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * finalizedDuration * 100 + laserEnergyCost)
+        return PanRecipe(recipe.inputs, recipe.copyOutputs(), laserEnergy) 
+        //recipe.cePerTick * finalizedDuration + laserEnergyCost)
     }
 }
