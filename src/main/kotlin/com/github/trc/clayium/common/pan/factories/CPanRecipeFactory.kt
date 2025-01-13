@@ -16,7 +16,7 @@ object CPanRecipeFactory : IPanRecipeFactory {
         val metaTileEntity = world.getMetaTileEntity(pos)
         if (metaTileEntity is ClayReactorMetaTileEntity) {
             return getEntryClayReactor(metaTileEntity, stacks, laserEnergy, laserCostPerTick)
-        } else {
+        }
         val recipe = metaTileEntity
             ?.getCapability(ClayiumTileCapabilities.RECIPE_LOGIC, null)
             ?.recipeProvider
@@ -24,7 +24,6 @@ object CPanRecipeFactory : IPanRecipeFactory {
             ?: return null
 
         return PanRecipe(recipe.inputs, recipe.copyOutputs(), recipe.cePerTick * recipe.duration)
-        }
     }
 
     private fun getEntryClayReactor(clayReactor: ClayReactorMetaTileEntity, stacks: List<ItemStack>, laserEnergy: Double, laserCostPerTick: ClayEnergy): IPanRecipe? {
