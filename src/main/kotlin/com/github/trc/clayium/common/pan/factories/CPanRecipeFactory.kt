@@ -16,7 +16,7 @@ object CPanRecipeFactory : IPanRecipeFactory {
         val metaTileEntity = world.getMetaTileEntity(pos)
         if (metaTileEntity is ClayReactorMetaTileEntity) {
             return getEntryClayReactor(metaTileEntity, stacks, laserEnergy, laserCostPerTick)
-        }
+        } else {
         val recipe = metaTileEntity
             ?.getCapability(ClayiumTileCapabilities.RECIPE_LOGIC, null)
             ?.recipeProvider
